@@ -1,6 +1,8 @@
 package cybersoft.javabackend.java18.gamedoanso.repository;
 
+import cybersoft.javabackend.java18.gamedoanso.jdbc.MySqlConnection;
 import cybersoft.javabackend.java18.gamedoanso.model.GameSession;
+import cybersoft.javabackend.java18.gamedoanso.model.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +11,10 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.sql.Connection;
 
 public class GameSessionRepository extends AbstractRepository<GameSession> {
     public void save(GameSession gameSession) {
@@ -126,4 +131,33 @@ public class GameSessionRepository extends AbstractRepository<GameSession> {
 
         return time.toLocalDateTime();
     }
+
+    public LinkedHashMap<String, Integer> listAllPlayersRanking() {
+        try {
+            String query = """
+                    SELECT username, SUM(is_completed)
+                    FROM gamedoanso.game_session 
+                    GROUP BY username 
+                    ORDER BY SUM(is_completed) 
+                    DESC;
+                    """;
+            Connection connection = MySqlConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            LinkedHashMap<String, Integer> lhmap
+                    = new LinkedHashMap<String, Integer>();
+
+            while (resultSet.next()) {
+                lhmap.put(resultSet.getString(1), resultSet.getInt(2));
+            }
+
+            return lhmap;
+
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
 }

@@ -7,6 +7,9 @@ import cybersoft.javabackend.java18.gamedoanso.repository.GameSessionRepository;
 import cybersoft.javabackend.java18.gamedoanso.repository.GuessRepository;
 import cybersoft.javabackend.java18.gamedoanso.repository.PlayerRepository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class GameService {
@@ -110,5 +113,10 @@ public class GameService {
 
     public void completeGame(String sessionId) {
         gameSessionRepository.completeGame(sessionId);
+    }
+
+    public LinkedHashMap<String, Integer> getAllPlayersRanking() {
+        LinkedHashMap<String, Integer> listPlayersRanking = gameSessionRepository.listAllPlayersRanking();
+        return listPlayersRanking;
     }
 }

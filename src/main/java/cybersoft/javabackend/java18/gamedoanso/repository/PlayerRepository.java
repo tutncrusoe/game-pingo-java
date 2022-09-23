@@ -1,7 +1,9 @@
 package cybersoft.javabackend.java18.gamedoanso.repository;
 
+import cybersoft.javabackend.java18.gamedoanso.jdbc.MySqlConnection;
 import cybersoft.javabackend.java18.gamedoanso.model.Player;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -9,7 +11,7 @@ public class PlayerRepository extends AbstractRepository<Player> {
     public Player findByUsername(String username) {
         // write a query to find the player by username
         final String query = """
-                select username, password, name
+                select username, password, name, count
                 from player
                 where username = ?
                 """;
@@ -26,6 +28,7 @@ public class PlayerRepository extends AbstractRepository<Player> {
                         results.getString("username"),
                         results.getString("password"),
                         results.getString("name")
+
                 );
             }
             return null;
@@ -68,4 +71,31 @@ public class PlayerRepository extends AbstractRepository<Player> {
             return statement.executeUpdate();
         });
     }
+
+    public Player findCountByUsername(String username) {
+        try {
+            String query = """
+                    SELECT username
+                    FROM gamedoanso.player
+                    WHERE username = ?
+                    """;
+            Connection connection = MySqlConnection.getConnection();
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            Player player = null;
+            while (resultSet.next()) {
+
+                player = new Player(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3));
+            }
+
+            return player;
+
+        } catch (Exception e) {
+
+        }
+        return null;
+    }
+
+
 }

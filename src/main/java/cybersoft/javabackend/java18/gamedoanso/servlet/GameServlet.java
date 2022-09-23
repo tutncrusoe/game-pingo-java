@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 @WebServlet(name = "gameServlet", urlPatterns = {
         UrlUtils.GAME,
@@ -33,8 +37,7 @@ public class GameServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         switch (req.getServletPath()) {
             case UrlUtils.GAME, UrlUtils.NEW_GAME -> loadGame(req, resp);
-            case UrlUtils.XEP_HANG -> req.getRequestDispatcher(JspUtils.XEP_HANG)
-                    .forward(req, resp);
+            case UrlUtils.XEP_HANG -> loadRank(req, resp);
             default -> resp.sendRedirect(req.getContextPath() + UrlUtils.NOT_FOUND);
         }
     }
@@ -94,5 +97,22 @@ public class GameServlet extends HttpServlet {
         Guess newGuess = new Guess(guessNumber, gameSession.getId(), result);
         gameService.saveGuess(newGuess);
         return newGuess;
+    }
+
+    private void loadRank(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // create
+        LinkedHashMap<String, Integer> listPlayersRanking = gameService.getAllPlayersRanking();
+
+        List<String> username
+                = new ArrayList<String>(listPlayersRanking.keySet());
+
+        List<Integer> rank
+                = new ArrayList<Integer>(listPlayersRanking.values());
+        // put in req
+        req.setAttribute("username", username);
+        req.setAttribute("rank", rank);
+        req.getRequestDispatcher(JspUtils.XEP_HANG)
+                .forward(req, resp);
     }
 }

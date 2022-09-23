@@ -9,6 +9,7 @@ public class Player implements Serializable {
     private final String name;
     private List<GameSession> manChoi;
 
+
     public Player(String username, String password, String name) {
         super();
         this.username = username;
@@ -27,8 +28,12 @@ public class Player implements Serializable {
     public String getName() {
         return name;
     }
-    
+
     public List<GameSession> getManChoi() {
         return manChoi;
+    }
+
+    public int getCount() {
+        return getManChoi().size();
     }
 }

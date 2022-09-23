@@ -14,17 +14,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <a class="navbar-brand font-weight-bold" href="#">Trò Chơi Đoán Số</a>
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link font-weight-bold" href="<%=request.getContextPath() + UrlUtils.ROOT%>">Home<span
-                        class="sr-only">(current)</span></a>
-            </li>
             <li class="nav-item">
-                <a class="nav-link font-weight-bold" href="<%=request.getContextPath() + UrlUtils.GAME%>">Game</a>
+                <a class="nav-link font-weight-bold" href="<%=request.getContextPath() + UrlUtils.ROOT%>">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link font-weight-bold" href="<%=request.getContextPath() + UrlUtils.GAME%>">Game<span
+                        class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link font-weight-bold"
@@ -42,6 +44,7 @@
         </ul>
     </div>
 </nav>
+
 <form action="<%=request.getContextPath() + UrlUtils.NEW_GAME%>" method="post" class="mt-2 mr-5 float-right">
     <input type="text" name="game-session" value="${game.id}" hidden>
     <div class="form-row align-items-center">
@@ -59,11 +62,13 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form action="<%=request.getContextPath() + UrlUtils.GAME%>" method="post" ${game.isCompleted ? 'hidden': ''}>
+            <form action="<%=request.getContextPath() + UrlUtils.GAME%>"
+                  method="post" ${game.isCompleted ? 'hidden': ''}>
                 <input type="text" name="game-session" value="${game.id}" hidden>
                 <div class="form-group form-row">
                     <label for="number"></label>
-                    <input type="number" name="guess" class="form-control form-control-lg text-center col-4 offset-4" id="number" required ${game.isCompleted ? 'readonly': ''}>
+                    <input type="number" name="guess" class="form-control form-control-lg text-center col-4 offset-4"
+                           id="number" required ${game.isCompleted ? 'readonly': ''}>
                 </div>
                 <div class="form-row align-items-center">
                     <button type="submit" class="btn btn-outline-primary btn-lg col-4 offset-4">Đoán</button>

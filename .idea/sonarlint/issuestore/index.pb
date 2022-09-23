@@ -15,13 +15,9 @@ y
 Isrc/main/java/cybersoft/javabackend/java18/gamedoanso/utils/UrlUtils.java,1/8/1849e5ebfe9ce75f0f7ff9f558674f45eb8b6c1a
 ~
 Nsrc/main/java/cybersoft/javabackend/java18/gamedoanso/servlet/AuthServlet.java,b/6/b6e98d722b2b199d1344ce13d6393efbea93145c
-w
-Gsrc/main/java/cybersoft/javabackend/java18/gamedoanso/model/Player.java,d/4/d485964d0de06163c8944fb4e53f0683eedc16fe
 p
 @src/main/java/cybersoft/javabackend/java18/gamedoanso/import.sql,3/c/3c75f46b93c91cd13673f0432056f2c64a060e27
 é
 ^src/main/java/cybersoft/javabackend/java18/gamedoanso/exception/DatabaseNotFoundException.java,e/0/e066febf0b6bd29d98d9a9da47c9d041ce5f6d4b
 Å
 Qsrc/main/java/cybersoft/javabackend/java18/gamedoanso/repository/JdbcExecute.java,e/f/ef0b9a8e2685c4b7a72acfbad0098703c3ab2d2a
-Ü
-Vsrc/main/java/cybersoft/javabackend/java18/gamedoanso/repository/PlayerRepository.java,b/3/b32a689d481640af4e1bbeb005fc2bf7da2d7387

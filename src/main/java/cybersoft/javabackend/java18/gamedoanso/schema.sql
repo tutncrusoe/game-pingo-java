@@ -6,6 +6,7 @@ create table if not exists player(
 	username varchar(255),
 	password varchar(255) not null,
 	name varchar(255) not null,
+	count int(3) not null,
 	primary key (username)
 );
 

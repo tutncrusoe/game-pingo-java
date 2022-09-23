@@ -28,6 +28,7 @@ public class GameSession implements Serializable {
         this.guess = new ArrayList<>();
         this.startTime = LocalDateTime.now();
         this.username = username;
+
     }
 
     private static int getRandomInt(int max) {

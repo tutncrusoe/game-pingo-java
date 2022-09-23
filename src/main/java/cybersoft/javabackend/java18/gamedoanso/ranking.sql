@@ -1,0 +1,1 @@
+SELECT username, SUM(is_completed) FROM gamedoanso.game_session GROUP BY username ORDER BY SUM(is_completed) DESC;
